@@ -1,0 +1,24 @@
+PROGRAM TO CALCULATE THROUGHPUT:
+BEGIN {
+lineCount = 0;totalBits = 0;
+}
+{
+if($1=="r" && $3=="6" && $4=="7") {
+	totalBits += 8*$6;
+if(lineCount==0 ) {
+timeBegin = $2; lineCount++;
+} else {
+timeEnd = $2;
+};
+};
+}
+END {
+duration = timeEnd-timeBegin;
+#print "Number of records is " NR;
+#print "Output: ";
+#print "Transmission: 0 to 1";
+print "  - Total transmitted bits = " totalBits " bits";
+print "  - duration = " duration " s";
+print "  - Thoughput = "  totalBits/duration/1e3 " kbps.";
+};
+ 
